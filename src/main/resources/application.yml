@@ -1,2 +1,16 @@
-spring.application.name=ant-shop
+server:
+  port: 9000
 
+spring:
+  application:
+    name: ant-shop # 层级：spring → application → name
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Shanghai
+#    username: root
+#    password: 1234
+
+#mybatis-plus:
+#  configuration:
+#    # mybatis-plus配置控制台打印完整带参数SQL语句
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
