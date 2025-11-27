@@ -1,4 +1,4 @@
-package com.yqegg.antshop;
+package com.yqegg.antmall;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

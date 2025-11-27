@@ -1,4 +1,4 @@
-package com.yqegg.antshop;
+package com.yqegg.antmall;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

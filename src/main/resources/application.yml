@@ -14,3 +14,11 @@ mybatis-plus:
   configuration:
     # mybatis-plus配置控制台打印完整带参数SQL语句
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+knife4j:
+  enable: true
+  setting:
+    enableSwaggerModels: true
+    enableReloadCacheParameter: true
+  openapi:
+    base-package: com.knife.ant # 替换为你的 Controller 所在包路径
