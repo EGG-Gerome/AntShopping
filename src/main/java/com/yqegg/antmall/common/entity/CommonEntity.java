@@ -22,5 +22,5 @@ public class CommonEntity {
     private LocalDateTime updateTime;
 
     @TableLogic(delval = "id")
-    private Long deleteFlag;
+    private Integer deleteFlag;     // 0=未删除，1=已删除
 }
