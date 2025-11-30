@@ -7,12 +7,11 @@ import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
 
-
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("t_product")
 public class Product extends CommonEntity{
-
+    // 内部使用，所以用注解。ProductAddBO是外部使用的，所以用注释
     /**
      * 商品名字
      */
