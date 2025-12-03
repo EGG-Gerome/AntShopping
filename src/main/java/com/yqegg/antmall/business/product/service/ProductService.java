@@ -8,8 +8,11 @@ import com.yqegg.antmall.business.product.entity.Product;
 import com.yqegg.antmall.business.product.vo.ProductQueryVO;
 import com.yqegg.antmall.common.entity.PageVO;
 
+import java.util.List;
+
 public interface ProductService extends IService<Product> {
     void add(ProductAddBO addBO);
     void edit(ProductEditBO editBO);
     PageVO<ProductQueryVO> page(ProductQueryBO queryBO);
+    void delete(List<Long> idList);
 }
