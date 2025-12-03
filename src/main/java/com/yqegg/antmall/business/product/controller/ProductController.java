@@ -9,11 +9,15 @@ import com.yqegg.antmall.common.entity.PageVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @Tag(name = "商品管理")
 @RestController
+@Validated      // 因为delete方法需要校验idList是否为空，我们写的不是实体类，而是一个列表，所以需要用@Validated校验
 @RequestMapping("product")
 public class ProductController {
 
@@ -47,6 +51,13 @@ public class ProductController {
     public PageVO<ProductQueryVO> page(ProductQueryBO queryBO){
         //     PageVO写了private List<T> dataList;所以这里不用再一次规定泛型<List>
         return productService.page(queryBO);
+    }
+
+    @Operation(description = "删除")
+    @PostMapping("delete")
+    // @NotEmpty 是校验idList是否为空，如果没有这个注解，就算前端传了空列表，也不会报错，更不会起到数据校验的作用
+    public void delete(@NotEmpty @RequestBody List<Long> idList){
+        productService.delete(idList);
     }
 
 }
