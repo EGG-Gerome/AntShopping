@@ -2,7 +2,10 @@ package com.yqegg.antmall.business.product.controller;
 
 import com.yqegg.antmall.business.product.bo.ProductAddBO;
 import com.yqegg.antmall.business.product.bo.ProductEditBO;
+import com.yqegg.antmall.business.product.bo.ProductQueryBO;
 import com.yqegg.antmall.business.product.service.ProductService;
+import com.yqegg.antmall.business.product.vo.ProductQueryVO;
+import com.yqegg.antmall.common.entity.PageVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -35,6 +38,15 @@ public class ProductController {
     public void update(@Valid @RequestBody ProductEditBO editBO){
         productService.edit(editBO);
 
+    }
+
+    @Operation(description = "分页查询")
+    @GetMapping("page")
+    // 没有校验是否为空的东西，所以不用加@Valid
+    // 不用加@RequestBody，因为分页查询是用GET方法，参数是在URL后面的
+    public PageVO<ProductQueryVO> page(ProductQueryBO queryBO){
+        //     PageVO写了private List<T> dataList;所以这里不用再一次规定泛型<List>
+        return productService.page(queryBO);
     }
 
 }

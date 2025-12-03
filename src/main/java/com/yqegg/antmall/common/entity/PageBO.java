@@ -8,10 +8,10 @@ import lombok.Data;
 @Data
 @Schema(description = "分页请求基础BO（所有分页请求类需继承）") // 可选：添加类级别的描述
 public class PageBO {
-    @Schema(description = "当前页", defaultValue = "0", example = "1") // 对应原 @ApiModelProperty 的属性
-    private Long currentPage = 0L;
+    @Schema(description = "当前页", defaultValue = "1", example = "1") // 对应原 @ApiModelProperty 的属性
+    private Long currentPage = 1L;
 
-    @Schema(description = "每页个数", defaultValue = "10", example = "20")
-    private Long pageSize = 10L;
+    @Schema(description = "每页个数", defaultValue = "20", example = "20")
+    private Long pageSize = 20L;
 
 }
