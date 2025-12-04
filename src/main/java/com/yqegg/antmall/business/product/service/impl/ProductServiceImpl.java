@@ -34,7 +34,6 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         BeanUtils.copyProperties(editBO, product);
 
         updateById(product);
-        save(product);
     }
 
     @Override

@@ -3,32 +3,43 @@ package com.yqegg.antmall.common.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-//import org.springframework.http.converter.json.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import java.math.BigInteger;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Configuration
 public class JacksonConfig {
 
     @Bean
-//    public ObjectMapper jacksonObjectMapper(Jackson2ObjectMapperBuilder builder) {
-//        ObjectMapper objectMapper = builder.createXmlMapper(false).build();
-
-    public ObjectMapper jacksonObjectMapper() { // 去掉参数 Jackson2ObjectMapperBuilder builder
-        // 原逻辑：ObjectMapper objectMapper = builder.createXmlMapper(false).build();
-        // 替换为直接创建 ObjectMapper，等效于 createXmlMapper(false)（不支持 XML 映射）
+    public ObjectMapper jacksonObjectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
+        
+        // 注册Java 8时间模块
+        JavaTimeModule javaTimeModule = new JavaTimeModule();
+        
+        // 配置LocalDateTime序列化格式
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        javaTimeModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(formatter));
+        
         // 全局配置序列化
         SimpleModule simpleModule = new SimpleModule();
         // 使用String来序列化Long包装类
         simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
         // 使用String来序列化long基本类型
         simpleModule.addSerializer(Long.TYPE, ToStringSerializer.instance);
-        // 使用String来序列化BigInteger包装类类型。（有人用BigInteger表示大的整数）
+        // 使用String来序列化BigInteger包装类类型
         simpleModule.addSerializer(BigInteger.class, ToStringSerializer.instance);
+        
+        // 注册所有模块
+        objectMapper.registerModule(javaTimeModule);
         objectMapper.registerModule(simpleModule);
+        
         return objectMapper;
     }
 }
