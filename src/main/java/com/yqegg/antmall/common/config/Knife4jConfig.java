@@ -40,7 +40,7 @@ public class Knife4jConfig {
     public GroupedOpenApi controllerGroup() {
         return GroupedOpenApi.builder()
                 .group("all") // 分组名称，和原来的保持一致
-                .packagesToScan("com.knife.ant") // 你的 Controller 所在包路径
+                .packagesToScan("com.yqegg.antmall") // 你的 Controller 所在包路径
                 .build();
     }
 }
